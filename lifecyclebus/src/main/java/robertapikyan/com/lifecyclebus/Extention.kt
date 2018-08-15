@@ -1,9 +1,10 @@
 package robertapikyan.com.lifecyclebus
 
-import robertapikyan.com.lifecyclebus.Bus
+import robertapikyan.com.lifecyclebus.executors.Threads
 
 /*
  * Created by Robert Apikyan on 1/24/2018.
  */
 
-fun Any?.sendEvent() = Bus.sendEvent(this)
+fun Any.sendToBus(sendOn: Threads = Threads.MAIN,
+                  receiveOn: Threads = Threads.MAIN) = Bus.sendEvent(this, sendOn)

@@ -1,31 +1,31 @@
-package robertapikyan.com.lifecyclebus.observable
+package robertapikyan.com.lifecyclebus.implementation.lifecycle
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.OnLifecycleEvent
-import java.util.*
+import robertapikyan.com.lifecyclebus.implementation.BusObserver
+import robertapikyan.com.lifecyclebus.implementation.Disposable
 import java.util.concurrent.locks.ReentrantLock
 
 /*
  * Created by Robert Apikyan on 1/24/2018.
  */
 
-class LifecycleBusObserver<in T>(
+internal class LifecycleObserver<T : Any>(
         lifecycleOwner: LifecycleOwner,
         private val observer: BusObserver<T>,
-        private val lifecycleDisposable: LifecycleDisposable
-) : LifecycleObserver, BusObserver<T>() {
+        private val disposable: LifecycleDisposable<T>
+) : LifecycleObserver, BusObserver<T>(observer), Disposable {
 
     private val lock by lazy { ReentrantLock() }
 
-    private val pendingEvents: Queue<T> = LinkedList<T>()
+    private val pendingEvents by lazy { PendingEvents<T>(observer.pendingEventsDeliveryRules) }
 
     @Volatile
     private var isActive = true
 
     init {
-        id = observer.id
         lifecycleOwner.lifecycle.addObserver(this)
     }
 
@@ -39,7 +39,7 @@ class LifecycleBusObserver<in T>(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun onDestroy() {
-        lifecycleDisposable.dispose(this)
+        dispose()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
@@ -61,5 +61,9 @@ class LifecycleBusObserver<in T>(
             pendingEvents.add(t)
             lock.unlock()
         }
+    }
+
+    override fun dispose() {
+        disposable.dispose(this)
     }
 }

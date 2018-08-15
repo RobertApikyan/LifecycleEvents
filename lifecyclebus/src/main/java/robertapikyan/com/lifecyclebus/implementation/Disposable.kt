@@ -1,10 +1,11 @@
-package robertapikyan.com.lifecyclebus.observable
+package robertapikyan.com.lifecyclebus.implementation
 
 /*
  * Created by Robert Apikyan on 1/24/2018.
  */
 
 interface Disposable {
+
     fun dispose()
 
     companion object {
