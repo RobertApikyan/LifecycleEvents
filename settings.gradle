@@ -1,1 +1,1 @@
-include ':app', ':lifecyclebus'
+include ':app', ':lifecycleEvents'
