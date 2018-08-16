@@ -1,16 +1,16 @@
 ![N|Solid](https://github.com/RobertApikyan/LifecycleEvents/blob/master/Intro/intro.png?raw=true)
 
-## API 16+
-
-LifecycleEvents is event bus implementation using lifecycle from android architecture components and kotlin language features,
-also it's designed for Java language users. With LifecycleEvents you can send any object as an event.
-
-## Simple Usage
+### API 16+
+LifecycleEvents library is an event bus implementation, using lifecycle from android architecture components and kotlin language features.
+It is also designed for Java language.
+### Simple Usage
+LifecycleEvents allows to send any object as an event,
+In this example UserInfo data class instance will be send as an event.
 ##### Kotlin
 ```kotlin
 ...
 // Sending userInfo as an event
-userInfo.sendAsEvent()
+userInfo.sendAsEvent() // sendAsEvent is a kotlin extention method
 ...
 
 // Receiving userInfo
