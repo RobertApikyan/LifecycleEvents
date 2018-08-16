@@ -28,11 +28,11 @@ disposable.dispose()
 ...
 
 // Sending userInfo as an event
-disposable = Events.sendEvent(userInfo);
+Events.sendEvent(userInfo);
 ...
 
 // Receiving userInfo
-Events.observeEvent(UserInfo.class, userInfo ->{
+disposable = Events.observeEvent(UserInfo.class, userInfo ->{
 	// use userInfo object here
 });
 ...
