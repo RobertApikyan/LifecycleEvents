@@ -50,7 +50,7 @@ internal class LifecycleObserver<T : Any>(
     }
 
     override fun event(t: T) {
-        if (isActive) {
+        if (isActive || observer.rule == PendingEventsRules.IMMEDIATE) {
             onEvent(t)
         } else {
             lock.lock()

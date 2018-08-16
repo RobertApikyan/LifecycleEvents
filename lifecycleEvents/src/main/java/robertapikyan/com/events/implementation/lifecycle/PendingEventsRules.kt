@@ -10,5 +10,6 @@ enum class PendingEventsRules {
     IN_ORDER, // all pending events will be delivered after onStart, with the same ordering as they received (FIFO)
     REVERSE_ORDER, // all pending events will be delivered after onStop, with the same ordering as they received (LIFO)
     ONLY_LAST, // only last received event will be delivered after onStop
-    ONLY_FIRST; // only first received event will be delivered after onStop
+    ONLY_FIRST, // only first received event will be delivered after onStop
+    IMMEDIATE; // events will be received, even after onStop
 }
