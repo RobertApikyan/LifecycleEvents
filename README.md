@@ -2,7 +2,7 @@
 
 ## API 16+
 
-    LifecycleEvents is event bus implementation using lifecycle from android architecture components and kotlin language features,
+LifecycleEvents is event bus implementation using lifecycle from android architecture components and kotlin language features,
 also it's designed for Java language users. With LifecycleEvents you can send any object as an event.
 
 ## Simple Usage
@@ -42,24 +42,24 @@ disposable.dispose()
 ...
 ````
 ## With Android Lifecycle
-    While observing events inside Activity or Fragment we do not need to cancel event observation manually, we can just pass lifecycleOwner instance as an observeEvent methods argument, and dispose() method will be called authomatically with onDestroy() lifecycle method.
+While observing events inside Activity or Fragment we do not need to cancel event observation manually, we can just pass lifecycleOwner instance as an observeEvent methods argument, and dispose() method will be called authomatically with onDestroy() lifecycle method.
 ##### Kotlin
 ```kotlin
-    observeEvent<User>(lifecycleOwner: this) { userInfo ->
-            // use userInfo object here
-    }
+observeEvent<User>(lifecycleOwner: this) { userInfo ->
+    // use userInfo object here
+}
 ```
 ## Pending Events Handling
-    Observation with lifecycleOwner allows us to handle events only if activity or fragment are at list started but not stopped.
+Observation with lifecycleOwner allows us to handle events only if activity or fragment are at list started but not stopped.
 Events that are arrived when activity/fragment is in stopped state will be marked as pending events, and will be delivered
 with onStart() lifecycle method. By default pending events will delivered with the same received order,
 but we can change delivery behavior by setting observeEvent method's rule attribute.
 ##### Kotlin
 ```kotlin
-    // After onStart() Only the last event will be delivered
-    observeEvent<User>(this, PendingEventsRules.ONLY_LAST) { userInfo ->
-         // use userInfo object here
-    }
+// After onStart() Only the last event will be delivered
+observeEvent<User>(this, PendingEventsRules.ONLY_LAST) { userInfo ->
+    // use userInfo object here
+}
 ```
 There are five types of PendingEventsRules
  1. IGNORE
@@ -69,24 +69,24 @@ There are five types of PendingEventsRules
  5. ONLY_FIRST
 
 #### Thread Handling
-    By default all events will be sent and received on the main thread, but we can change this.
+By default all events will be sent and received on the main thread, but we can change this.
 In the above example event observation will be performed on the background thread (do this if you have big number of observers for specified event),
 and the event will be received on the main thread.
 ##### Kotlin
 ```kotlin
-    ...
-    // observers will be iterated on background thread
-    user.sendAsEvent(Threads.BACKGROUND)
-    ...
-    // event will be recieved on the main thread (here you can not specify Threads.MAIN, it is the default value)
-    observeEvent<User>(this, Threads.MAIN) { userInfo ->
-         // use userInfo object here
-    }
+...
+// observers will be iterated on background thread
+user.sendAsEvent(Threads.BACKGROUND)
+...
+// event will be recieved on the main thread (here you can not specify Threads.MAIN, it is the default value)
+observeEvent<User>(this, Threads.MAIN) { userInfo ->
+    // use userInfo object here
+}
 
-    // also you can specify  Threads.BACKGROUND, in order to receive event on the background thread
-    observeEvent<User>(this, Threads.BACKGROUND) { userInfo ->
-             // use userInfo object here
-    }
+// also you can specify  Threads.BACKGROUND, in order to receive event on the background thread
+observeEvent<User>(this, Threads.BACKGROUND) { userInfo ->
+    // use userInfo object here
+}
 ```
 
 
