@@ -2,7 +2,8 @@
 
 ## API 16+
 
-    LifecycleEvents is event bus implementation using lifecycle from android architecture components and kotlin language features, also it's designed for Java language users. With LifecycleEvents you can send any object as an event.
+    LifecycleEvents is event bus implementation using lifecycle from android architecture components and kotlin language features,
+also it's designed for Java language users. With LifecycleEvents you can send any object as an event.
 
 ## Simple Usage
 ##### Kotlin
