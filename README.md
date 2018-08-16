@@ -63,10 +63,11 @@ observeEvent<User>(this, PendingEventsRules.ONLY_LAST) { userInfo ->
 ```
 There are five types of PendingEventsRules
  1. IGNORE
- 2. IN_ORDER
+ 2. IN_ORDER // default
  3. REVERSE_ORDER
  4. ONLY_LAST
  5. ONLY_FIRST
+ 6. IMMEDIATE // event will be delivered, even if onStop is called
 
 #### Thread Handling
 By default all events will be sent and received on the main thread, but we can change this.
