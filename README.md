@@ -4,13 +4,13 @@
 LifecycleEvents library is an event bus implementation, using lifecycle from android architecture components and kotlin language features.
 It is also designed for Java language.
 ### Simple Usage
-LifecycleEvents allows to send any object as an event,
-In this example UserInfo data class instance will be send as an event.
-##### Kotlin
+LifecycleEvents allows us to send any object as an event,
+In this example, UserInfo's instance will be send as an event.
+##### kotlin
 ```kotlin
 ...
 // Sending userInfo as an event
-userInfo.sendAsEvent() // sendAsEvent is a kotlin extention method
+userInfo.sendAsEvent() // sendAsEvent is a kotlin extention method, for java user Events.sendEvent(userInfo) mthod
 ...
 
 // Receiving userInfo
@@ -19,11 +19,11 @@ disposable = observeEvent<UserInfo> { userInfo ->
         }
 ...
 
-// Cancel event observation when you do need it anymore
+// Cancel event observation
 disposable.dispose()
 ...
 ````
-##### Java
+##### java
 ```java
 ...
 
@@ -37,24 +37,24 @@ Events.observeEvent(UserInfo.class, userInfo ->{
 });
 ...
 
-// Cancel event observation when you do need it anymore
+// Cancel event observation
 disposable.dispose()
 ...
 ````
 ## With Android Lifecycle
-While observing events inside Activity or Fragment we do not need to cancel event observation manually, we can just pass lifecycleOwner instance as an observeEvent methods argument, and dispose() method will be called authomatically with onDestroy() lifecycle method.
-##### Kotlin
+While observing events inside Activity or Fragment we do not need to cancel event observation manually, we can just pass lifecycleOwner instance as an observeEvent method's argument, and dispose() method will be called automatically with onDestroy() lifecycle method.
+##### kotlin
 ```kotlin
 observeEvent<User>(lifecycleOwner: this) { userInfo ->
     // use userInfo object here
 }
 ```
 ## Pending Events Handling
-Observation with lifecycleOwner allows us to handle events only if activity or fragment are at list started but not stopped.
-Events that are arrived when activity/fragment is in stopped state will be marked as pending events, and will be delivered
-with onStart() lifecycle method. By default pending events will delivered with the same received order,
+Observation with lifecycleOwner allows us to handle events only when activity or fragment are at list started but not stopped.
+Events that are arrived when activity/fragment is in the stopped state will be marked as pending events, and will be delivered
+with onStart() lifecycle method. By default pending events will delivered with the same receiving order,
 but we can change delivery behavior by setting observeEvent method's rule attribute.
-##### Kotlin
+##### kotlin
 ```kotlin
 // After onStart() Only the last event will be delivered
 observeEvent<User>(this, PendingEventsRules.ONLY_LAST) { userInfo ->
@@ -67,16 +67,16 @@ There are five types of PendingEventsRules
  3. REVERSE_ORDER
  4. ONLY_LAST
  5. ONLY_FIRST
- 6. IMMEDIATE // event will be delivered, even if onStop is called
+ 6. IMMEDIATE // events will be delivered, even after onStop()
 
-#### Thread Handling
+## Threads Handling
 By default all events will be sent and received on the main thread, but we can change this.
-In the above example event observation will be performed on the background thread (do this if you have big number of observers for specified event),
+In the above example, event observation will be done on the background worker thread (do this if you have big number of observers for specified event),
 and the event will be received on the main thread.
-##### Kotlin
+##### kotlin
 ```kotlin
 ...
-// observers will be iterated on background thread
+// observers will be iterated on the background worker thread
 user.sendAsEvent(Threads.BACKGROUND)
 ...
 // event will be recieved on the main thread (here you can not specify Threads.MAIN, it is the default value)
@@ -84,7 +84,7 @@ observeEvent<User>(this, Threads.MAIN) { userInfo ->
     // use userInfo object here
 }
 
-// also you can specify  Threads.BACKGROUND, in order to receive event on the background thread
+// also you can specify  Threads.BACKGROUND, in order to receive events on the background worker thread
 observeEvent<User>(this, Threads.BACKGROUND) { userInfo ->
     // use userInfo object here
 }
