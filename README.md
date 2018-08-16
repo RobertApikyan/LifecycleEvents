@@ -89,7 +89,22 @@ observeEvent<User>(this, Threads.BACKGROUND) { userInfo ->
     // use userInfo object here
 }
 ```
-
+### Add to Project
+##### Add to project level build.gradle
+```groovy
+    allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+##### Add to app module level build.gradle
+```groovy
+    dependencies {
+	        implementation 'com.github.RobertApikyan:LifecycleEvents:0.0.1'
+	}
+```
 
 
 
