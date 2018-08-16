@@ -211,6 +211,70 @@ inline fun <reified T> observeEvent(lifecycleOwner: LifecycleOwner,
  * after calling disposable.dispose() method the observable will be removed
  */
 fun <T : Any> observeEvent(observableClass: Class<T>,
+                           lifecycleOwner: LifecycleOwner,
+                           receiveOn: Threads = Threads.MAIN,
+                           rule: PendingEventsRules = PendingEventsRules.IN_ORDER,
+                           observer: EventObserver<T>) =
+        EventObservables.observable.observe(lifecycleOwner, AbstractEventObserver
+                .fromLambda(observableClass, receiveOn, rule, observer::onEvent) as AbstractEventObserver<Any>)
+
+/**
+ * Use this class to start observing for specified event type, this method receives lifecycleOwner
+ * as an argument, end events will be delivered to observable only if lifecycleOwner's lifecycle state is
+ * between onStart and onStop, events that are out off this state will be delivered later or will be
+ * ignored, it depends on specified rules [PendingEventsRules]
+ *
+ * @param observableClass is the type of event that will be observed
+ * @param rule is the pending events handling policy, pending events are thous events that are received
+ * when lifecycleOwner is not visible ( after onStop() callback ), by default all events will be delivered
+ * after lifecycleOwner onStart callback, with the same ordering
+ * @param observer this observer will be automatically removed when lifecycleOwner is destroyed
+ * @return [robertapikyan.com.events.implementation.Disposable],
+ * after calling disposable.dispose() method the observable will be removed
+ */
+fun <T : Any> observeEvent(observableClass: Class<T>,
+                           lifecycleOwner: LifecycleOwner,
+                           rule: PendingEventsRules = PendingEventsRules.IN_ORDER,
+                           observer: EventObserver<T>) =
+        observeEvent(observableClass, lifecycleOwner, Threads.MAIN, rule, observer)
+
+/**
+ * Use this class to start observing for specified event type, this method receives lifecycleOwner
+ * as an argument, end events will be delivered to observable only if lifecycleOwner's lifecycle state is
+ * between onStart and onStop, events that are out off this state will be delivered later or will be
+ * ignored, it depends on specified rules [PendingEventsRules]
+ *
+ * @param observableClass is the type of event that will be observed
+ * @param receiveOn is the thread where event will be delivered,
+ * by default observations are invoking on the MAIN thread
+ * @param observer this observer will be automatically removed when lifecycleOwner is destroyed
+ * @return [robertapikyan.com.events.implementation.Disposable],
+ * after calling disposable.dispose() method the observable will be removed
+ */
+fun <T : Any> observeEvent(observableClass: Class<T>,
+                           lifecycleOwner: LifecycleOwner,
+                           receiveOn: Threads = Threads.MAIN,
+                           observer: EventObserver<T>) =
+        observeEvent(observableClass, lifecycleOwner, receiveOn, PendingEventsRules.IN_ORDER, observer)
+
+/**
+ * Use this class to start observing for specified event type, this method receives lifecycleOwner
+ * as an argument, end events will be delivered to observable only if lifecycleOwner's lifecycle state is
+ * between onStart and onStop, events that are out off this state will be delivered later or will be
+ * ignored, it depends on specified rules [PendingEventsRules]
+ *
+ * @param observableClass is the type of event that will be observed
+ * @param observer this observer will be automatically removed when lifecycleOwner is destroyed
+ * @return [robertapikyan.com.events.implementation.Disposable],
+ * after calling disposable.dispose() method the observable will be removed
+ */
+fun <T : Any> observeEvent(observableClass: Class<T>,
+                           lifecycleOwner: LifecycleOwner,
+                           observer: EventObserver<T>) =
+        observeEvent(observableClass, lifecycleOwner, Threads.MAIN, PendingEventsRules.IN_ORDER, observer)
+
+
+fun <T : Any> observeEvent(observableClass: Class<T>,
                            receiveOn: Threads = Threads.MAIN,
                            rule: PendingEventsRules = PendingEventsRules.IN_ORDER,
                            observer: EventObserver<T>) =
@@ -268,5 +332,6 @@ fun <T : Any> observeEvent(observableClass: Class<T>,
 fun <T : Any> observeEvent(observableClass: Class<T>,
                            observer: EventObserver<T>) =
         observeEvent(observableClass, Threads.MAIN, PendingEventsRules.IN_ORDER, observer)
+
 
 
