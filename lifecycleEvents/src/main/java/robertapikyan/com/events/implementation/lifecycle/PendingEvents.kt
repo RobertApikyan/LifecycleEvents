@@ -31,6 +31,8 @@ class PendingEvents<T>(private val policy: PendingEventsRules,
             }
 
             PendingEventsRules.IGNORE -> false
+
+            PendingEventsRules.IMMEDIATE -> false
         }
     }
 }

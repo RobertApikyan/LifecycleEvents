@@ -3,13 +3,13 @@ package robertapikyan.com.events.executors
 class TaskExecutors : TaskExecutor() {
 
     companion object {
-        val instanse by lazy(LazyThreadSafetyMode.SYNCHRONIZED) { TaskExecutors() }
+        private val instance by lazy(LazyThreadSafetyMode.SYNCHRONIZED) { TaskExecutors() }
 
         fun executeOnBackgroundThread(runnable: () -> Unit) =
-                instanse.executeOnBackgroundThread(Runnable(runnable))
+                instance.executeOnBackgroundThread(Runnable(runnable))
 
         fun executeOnMainThread(runnable: () -> Unit) =
-                instanse.executeOnMainThread(Runnable(runnable))
+                instance.executeOnMainThread(Runnable(runnable))
 
     }
 
