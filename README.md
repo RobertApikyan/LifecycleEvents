@@ -61,7 +61,7 @@ observeEvent<User>(this, PendingEventsRules.ONLY_LAST) { userInfo ->
     // use userInfo object here
 }
 ```
-There are five types of PendingEventsRules
+#### There are five types of PendingEventsRules
 ##### 1. IGNORE
 ##### 2. IN_ORDER // default
 ##### 3. REVERSE_ORDER
