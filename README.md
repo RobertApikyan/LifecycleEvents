@@ -1,6 +1,10 @@
 ![N|Solid](https://github.com/RobertApikyan/LifecycleEvents/blob/master/Intro/intro.png?raw=true)
 
 ### MinSDK 14+
+[![](https://jitpack.io/v/RobertApikyan/LifecycleEvents.svg)](https://jitpack.io/#RobertApikyan/LifecycleEvents)
+
+### LifecycleEvents
+
 LifecycleEvents library is an event bus implementation, using lifecycle from android architecture components and kotlin language features.
 It is also designed for Java language.
 ### Simple Usage
