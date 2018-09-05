@@ -2,6 +2,8 @@
 
 ### MinSDK 14+
 [![](https://jitpack.io/v/RobertApikyan/LifecycleEvents.svg)](https://jitpack.io/#RobertApikyan/LifecycleEvents)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 
 ### LifecycleEvents
 
