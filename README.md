@@ -1,6 +1,12 @@
 ![N|Solid](https://github.com/RobertApikyan/LifecycleEvents/blob/master/Intro/intro.png?raw=true)
 
 ### MinSDK 14+
+[![](https://jitpack.io/v/RobertApikyan/LifecycleEvents.svg)](https://jitpack.io/#RobertApikyan/LifecycleEvents)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+
+### LifecycleEvents
+
 LifecycleEvents library is an event bus implementation, using lifecycle from android architecture components and kotlin language features.
 It is also designed for Java language.
 ### Simple Usage
@@ -28,11 +34,11 @@ disposable.dispose()
 ...
 
 // Sending userInfo as an event
-disposable = Events.sendEvent(userInfo);
+Events.sendEvent(userInfo);
 ...
 
 // Receiving userInfo
-Events.observeEvent(UserInfo.class, userInfo ->{
+disposable = Events.observeEvent(UserInfo.class, userInfo ->{
 	// use userInfo object here
 });
 ...
@@ -61,13 +67,13 @@ observeEvent<User>(this, PendingEventsRules.ONLY_LAST) { userInfo ->
     // use userInfo object here
 }
 ```
-There are five types of PendingEventsRules
- 1. IGNORE
- 2. IN_ORDER // default
- 3. REVERSE_ORDER
- 4. ONLY_LAST
- 5. ONLY_FIRST
- 6. IMMEDIATE // events will be delivered, even after onStop()
+#### There are five types of PendingEventsRules
+##### 1. IGNORE
+##### 2. IN_ORDER // default
+##### 3. REVERSE_ORDER
+##### 4. ONLY_LAST
+##### 5. ONLY_FIRST
+##### 6. IMMEDIATE // events will be delivered, even after onStop()
 
 ## Threads Handling
 By default all events will be sent and received on the main thread, but we can change this.
@@ -113,7 +119,7 @@ dependencies {
 License
 -------
 
-    Copyright 2017 Robert Apikyan
+    Copyright 2018 Robert Apikyan
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
