@@ -105,7 +105,7 @@ allprojects {
     }
 }
 ```
-##### Add to app module level build.gradle
+###### Add to app module level build.gradle
 ```groovy
 dependencies {
     implementation 'com.github.RobertApikyan:LifecycleEvents:1.0.1'
