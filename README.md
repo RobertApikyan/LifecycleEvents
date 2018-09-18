@@ -108,11 +108,27 @@ allprojects {
 ##### Add to app module level build.gradle
 ```groovy
 dependencies {
-    implementation 'com.github.RobertApikyan:LifecycleEvents:0.0.1'
+    implementation 'com.github.RobertApikyan:LifecycleEvents:1.0.1'
 }
 ```
+##### Maven
 
-
+```xml
+<repositories>
+    <repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+```
+###### Add the dependency
+```xml
+<dependency>
+   <groupId>com.github.RobertApikyan</groupId>
+   <artifactId>LifecycleEvents</artifactId>
+   <version>1.0.1</version>
+</dependency>
+```
 
 [![View Robert Apikyan profile on LinkedIn](https://www.linkedin.com/img/webpromo/btn_viewmy_160x33.png)](https://www.linkedin.com/in/robert-apikyan-24b915130/)
 
