@@ -1,4 +1,4 @@
-![N|Solid](https://github.com/RobertApikyan/LifecycleEvents/blob/master/Intro/intro.png?raw=true)
+![N|Solid](https://raw.githubusercontent.com/RobertApikyan/LifecycleEvents/intro/Intro/intro.png?raw=true)
 
 ### MinSDK 14+
 [![](https://jitpack.io/v/RobertApikyan/LifecycleEvents.svg)](https://jitpack.io/#RobertApikyan/LifecycleEvents)
